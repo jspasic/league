@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 import rs.jspasic.league.model.Team;
 
 import java.util.Optional;
@@ -20,6 +21,7 @@ public class TeamRepositoryTest {
     private TeamRepository teamRepository;
 
     @Test
+    @Transactional
     public void findTeamByNameFails() {
         String teamName = "Radnicki";
         Optional<Team> to = teamRepository.findByTeamName(teamName);
@@ -27,8 +29,9 @@ public class TeamRepositoryTest {
     }
 
     @Test
+    @Transactional
     public void findTeamByNameSucceeds() {
-        String teamName = "Arsenal";
+        String teamName = "Chelsea";
         Optional<Team> to = teamRepository.findByTeamName(teamName);
         assertTrue(to.isPresent());
     }

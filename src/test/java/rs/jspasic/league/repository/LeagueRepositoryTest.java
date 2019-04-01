@@ -10,6 +10,7 @@ import rs.jspasic.league.model.League;
 
 import java.util.Optional;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -47,8 +48,26 @@ public class LeagueRepositoryTest {
     @Test
     @Transactional
     public void findLeagueRepositoryByNameSucceeds() {
-        String leagueName = "Champions league 2020/21";
+        String leagueName = "Champions league 2017/18";
         Optional<League> lo = leagueRepository.findByLeagueName(leagueName);
         assertTrue(lo.isPresent());
+    }
+
+    @Test
+    @Transactional
+    public void leagueTeamsNumberCorrect() {
+        String leagueName = "Champions league 2017/18";
+        Optional<League> lo = leagueRepository.findByLeagueName(leagueName);
+        assertTrue(lo.isPresent());
+        lo.ifPresent(l -> assertEquals(32, l.getTeams().size()));
+    }
+
+    @Test
+    @Transactional
+    public void leagueGroupsNumberCorrect() {
+        String leagueName = "Champions league 2017/18";
+        Optional<League> lo = leagueRepository.findByLeagueName(leagueName);
+        assertTrue(lo.isPresent());
+        lo.ifPresent(l -> assertEquals(8, l.getGroups().size()));
     }
 }

@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -29,6 +30,10 @@ public class Group {
     @OneToMany(mappedBy = "group")
     private List<Game> games;
     @ManyToMany
+    @JoinTable(name = "teams_groups",
+            joinColumns = @JoinColumn(name = "group_id"),
+            inverseJoinColumns = @JoinColumn(name = "team_id")
+    )
     private List<Team> teams = new ArrayList<>();
 
     public Group() {
