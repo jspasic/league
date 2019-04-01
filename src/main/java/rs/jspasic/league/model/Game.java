@@ -114,4 +114,12 @@ public class Game {
     public void setAwayTeamGoals(Integer awayTeamGoals) {
         this.awayTeamGoals = awayTeamGoals;
     }
+
+    public boolean isDraw() {
+        return homeTeamGoals.intValue() == awayTeamGoals.intValue();
+    }
+
+    public boolean isHomeTeamWin() {
+        return homeTeamGoals.intValue() > awayTeamGoals.intValue();
+    }
 }
