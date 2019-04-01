@@ -54,4 +54,14 @@ public class GroupRepositoryTest {
         assertTrue(go.isPresent());
         go.ifPresent(g -> assertEquals(12, g.getGames().size()));
     }
+
+    @Test
+    @Transactional
+    public void findGroupByLeagueNameAndGroupNameSucceeds() {
+        String leagueName = "Champions league 2017/18";
+        String groupName = "C";
+        Optional<Group> go = groupRepository.findByLeagueNameAndGroupName(leagueName, groupName);
+        assertTrue(go.isPresent());
+        go.ifPresent(g -> assertEquals(1003L, g.getId().longValue()));
+    }
 }
