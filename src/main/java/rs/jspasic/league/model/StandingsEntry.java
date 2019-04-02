@@ -2,16 +2,16 @@ package rs.jspasic.league.model;
 
 public class StandingsEntry {
 
-    private int rank;
+    private int rank = 0;
     private String team;
-    private int playedGames;
-    private int points;
-    private int goals;
-    private int goalsAgainst;
-    private int goalDifference;
-    private int win;
-    private int lose;
-    private int draw;
+    private int playedGames = 0;
+    private int points = 0;
+    private int goals = 0;
+    private int goalsAgainst = 0;
+    private int goalDifference = 0;
+    private int win = 0;
+    private int lose = 0;
+    private int draw = 0;
 
     public StandingsEntry(String team) {
         this.team = team;
