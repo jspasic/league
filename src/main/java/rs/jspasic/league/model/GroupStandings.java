@@ -1,5 +1,7 @@
 package rs.jspasic.league.model;
 
+import rs.jspasic.league.util.StandingsEntry;
+
 import java.util.List;
 
 public class GroupStandings {

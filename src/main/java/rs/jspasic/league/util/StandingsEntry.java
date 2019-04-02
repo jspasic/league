@@ -1,4 +1,4 @@
-package rs.jspasic.league.model;
+package rs.jspasic.league.util;
 
 public class StandingsEntry {
 

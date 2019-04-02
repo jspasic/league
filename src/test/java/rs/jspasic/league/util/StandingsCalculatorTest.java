@@ -1,4 +1,4 @@
-package rs.jspasic.league.service;
+package rs.jspasic.league.util;
 
 import org.junit.Test;
 import rs.jspasic.league.model.Game;

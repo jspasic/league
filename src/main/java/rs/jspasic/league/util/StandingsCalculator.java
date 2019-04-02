@@ -1,11 +1,9 @@
-package rs.jspasic.league.service;
+package rs.jspasic.league.util;
 
 import rs.jspasic.league.model.Game;
 import rs.jspasic.league.model.Group;
 import rs.jspasic.league.model.GroupStandings;
-import rs.jspasic.league.model.StandingsEntry;
 import rs.jspasic.league.model.Team;
-import rs.jspasic.league.util.StandingsEntryComparator;
 
 import java.util.Collections;
 import java.util.HashMap;

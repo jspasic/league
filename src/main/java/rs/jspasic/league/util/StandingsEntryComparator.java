@@ -1,7 +1,5 @@
 package rs.jspasic.league.util;
 
-import rs.jspasic.league.model.StandingsEntry;
-
 import java.util.Comparator;
 
 /**
