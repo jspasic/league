@@ -20,7 +20,7 @@ public class StandingsEntryComparator implements Comparator<StandingsEntry> {
             } else {
                 if (se1.getGoalDifference() > se2.getGoalDifference()) {
                     return -1;
-                } else if (se1.getGoalDifference() > se2.getGoalDifference()) {
+                } else if (se1.getGoalDifference() < se2.getGoalDifference()) {
                     return 1;
                 } else return 0;
             }
