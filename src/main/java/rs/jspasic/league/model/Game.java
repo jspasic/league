@@ -43,6 +43,18 @@ public class Game {
 
     }
 
+    public Game(Long id, League league, Integer matchday, Group group, Team homeTeam, Team awayTeam, Date kickoffAt, Integer homeTeamGoals, Integer awayTeamGoals) {
+        this.id = id;
+        this.league = league;
+        this.matchday = matchday;
+        this.group = group;
+        this.homeTeam = homeTeam;
+        this.awayTeam = awayTeam;
+        this.kickoffAt = kickoffAt;
+        this.homeTeamGoals = homeTeamGoals;
+        this.awayTeamGoals = awayTeamGoals;
+    }
+
     public Long getId() {
         return id;
     }
