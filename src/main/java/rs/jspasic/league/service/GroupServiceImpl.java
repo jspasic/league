@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.jspasic.league.model.Group;
 import rs.jspasic.league.repository.GroupRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,5 +28,23 @@ public class GroupServiceImpl implements GroupService {
     public Group findByLeagueNameAndGroupName(String leagueName, String groupName) {
         Optional<Group> go = groupRepository.findByLeagueNameAndGroupName(leagueName, groupName);
         return go.orElseThrow(() -> new RuntimeException("No group found for leagueName=" + leagueName + " and groupName=" + groupName));
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Group> findByLeagueId(Long leagueId) {
+        return groupRepository.findByLeagueId(leagueId);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public Group addGroup(Group group) {
+        return groupRepository.save(group);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public List<Group> addGroups(List<Group> groups) {
+        return groupRepository.saveAll(groups);
     }
 }
