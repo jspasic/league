@@ -6,7 +6,7 @@ create table `leagues` (
 
 create table `teams` (
   id INT NOT NULL AUTO_INCREMENT,
-  team_name VARCHAR(100) NOT NULL,
+  team_name VARCHAR(100) NOT NULL UNIQUE,
   PRIMARY KEY(id)
 );
 

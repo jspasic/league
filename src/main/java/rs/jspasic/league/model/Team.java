@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class Team {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "team_name")
@@ -20,6 +20,10 @@ public class Team {
 
     public Team() {
 
+    }
+
+    public Team(String teamName) {
+        this.teamName = teamName;
     }
 
     public Team(Long id, String teamName) {
