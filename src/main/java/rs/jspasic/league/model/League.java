@@ -18,15 +18,15 @@ import java.util.List;
 public class League {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
     @Column(name = "league_name")
     private String leagueName;
     @OneToMany(mappedBy = "league")
-    private List<Group> groups;
+    private List<Group> groups = new ArrayList<>();
     @OneToMany(mappedBy = "league")
-    private List<Game> games;
+    private List<Game> games = new ArrayList<>();
     @ManyToMany
     @JoinTable(name = "teams_leagues",
             joinColumns = @JoinColumn(name = "league_id"),

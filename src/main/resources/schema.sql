@@ -1,6 +1,6 @@
 create table `leagues` (
   id INT NOT NULL AUTO_INCREMENT,
-  league_name VARCHAR(100) NOT NULL,
+  league_name VARCHAR(100) NOT NULL UNIQUE,
   PRIMARY KEY(id)
 );
 

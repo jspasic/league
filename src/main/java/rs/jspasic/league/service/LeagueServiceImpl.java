@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.jspasic.league.model.League;
 import rs.jspasic.league.repository.LeagueRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,8 +24,21 @@ public class LeagueServiceImpl implements LeagueService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public League findLeagueByName(String leagueName) {
         Optional<League> lo = leagueRepository.findByLeagueName(leagueName);
         return lo.orElseThrow(() -> new RuntimeException("No League with name=" + leagueName));
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<League> findAll() {
+        return leagueRepository.findAll();
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.REQUIRED)
+    public League addLeague(League league) {
+        return leagueRepository.save(league);
     }
 }
