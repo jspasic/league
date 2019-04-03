@@ -58,6 +58,7 @@ public class ResultsController {
     }
 
     private Game extractAndHydrateGame(GameWrapper gameWrapper) {
+
         League league = leagueService.findLeagueByName(gameWrapper.getLeagueTitle());
         Group group = groupService.findByLeagueNameAndGroupName(gameWrapper.getLeagueTitle(), gameWrapper.getGroup());
         Team homeTeam = teamService.findTeamByName(gameWrapper.getHomeTeam());
