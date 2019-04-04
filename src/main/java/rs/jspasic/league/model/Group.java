@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Table(name = "groups")
@@ -38,6 +39,11 @@ public class Group {
 
     public Group() {
 
+    }
+
+    public Group(League league, String groupName) {
+        this.league = league;
+        this.groupName = groupName;
     }
 
     public Long getId() {
@@ -78,5 +84,20 @@ public class Group {
 
     public void setTeams(List<Team> teams) {
         this.teams = teams;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Group group = (Group) o;
+        return Objects.equals(id, group.id) &&
+                groupName.equals(group.groupName) &&
+                league.equals(group.league);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, groupName, league);
     }
 }

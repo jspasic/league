@@ -38,6 +38,10 @@ public class League {
 
     }
 
+    public League(String leagueName) {
+        this.leagueName = leagueName;
+    }
+
     public Long getId() {
         return id;
     }

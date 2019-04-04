@@ -9,6 +9,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "games")
@@ -133,5 +134,26 @@ public class Game {
 
     public boolean isHomeTeamWin() {
         return homeTeamGoals.intValue() > awayTeamGoals.intValue();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return Objects.equals(id, game.id) &&
+                league.equals(game.league) &&
+                Objects.equals(matchday, game.matchday) &&
+                group.equals(game.group) &&
+                homeTeam.equals(game.homeTeam) &&
+                awayTeam.equals(game.awayTeam) &&
+                Objects.equals(kickoffAt, game.kickoffAt) &&
+                homeTeamGoals.equals(game.homeTeamGoals) &&
+                awayTeamGoals.equals(game.awayTeamGoals);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, league, matchday, group, homeTeam, awayTeam, kickoffAt, homeTeamGoals, awayTeamGoals);
     }
 }
