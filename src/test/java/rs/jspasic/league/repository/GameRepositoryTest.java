@@ -8,6 +8,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import rs.jspasic.league.model.Game;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -49,5 +52,58 @@ public class GameRepositoryTest {
         go.ifPresent(g -> assertEquals(0, g.getHomeTeamGoals().intValue()));
         go.ifPresent(g -> assertEquals(4, g.getAwayTeamGoals().intValue()));
         go.ifPresent(g -> assertEquals(3, g.getMatchday().intValue()));
+    }
+
+    @Test
+    @Transactional
+    public void findGamesByLeagueId() {
+        List<Game> games = gameRepository.findGames(1001L, null, null, null, null);
+        assertEquals(96, games.size());
+    }
+
+    @Test
+    @Transactional
+    public void findGamesByLeagueIdAndFilterDateFrom() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateFrom = sdf.parse("2017-11-22 00:00:00");
+        List<Game> games = gameRepository.findGames(1001L, dateFrom, null, null, null);
+        assertEquals(32, games.size());
+    }
+
+    @Test
+    @Transactional
+    public void findGamesByLeagueIdAndFilterDateFromDateTo() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateFrom = sdf.parse("2017-11-22 00:00:00");
+        Date dateTo = sdf.parse("2017-12-01 00:00:00");
+        List<Game> games = gameRepository.findGames(1001L, dateFrom, dateTo, null, null);
+        assertEquals(16, games.size());
+    }
+
+    @Test
+    @Transactional
+    public void findGamesByLeagueIdAndFilterDateFromDateToGroupName() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateFrom = sdf.parse("2017-11-22 00:00:00");
+        Date dateTo = sdf.parse("2017-12-01 00:00:00");
+        List<Game> games = gameRepository.findGames(1001L, dateFrom, dateTo, "C", null);
+        assertEquals(2, games.size());
+    }
+
+    @Test
+    @Transactional
+    public void findGamesByLeagueIdAndFilterDateFromDateToGroupNameTeamName() throws Exception {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date dateFrom = sdf.parse("2017-11-22 00:00:00");
+        Date dateTo = sdf.parse("2017-12-01 00:00:00");
+        List<Game> games = gameRepository.findGames(1001L, dateFrom, dateTo, "C", "Atlético Madrid");
+        assertEquals(1, games.size());
+    }
+
+    @Test
+    @Transactional
+    public void findGamesByLeagueIdAndFilterGroupName() throws Exception {
+        List<Game> games = gameRepository.findGames(1001L, null, null, "E", null);
+        assertEquals(12, games.size());
     }
 }

@@ -8,6 +8,7 @@ import rs.jspasic.league.model.Game;
 import rs.jspasic.league.model.Group;
 import rs.jspasic.league.repository.GameRepository;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -32,5 +33,11 @@ public class GameServiceImpl implements GameService {
     @Transactional(propagation = Propagation.SUPPORTS)
     public List<Game> findByGroup(Group g) {
         return gameRepository.findByGroup(g);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
+    public List<Game> findGames(Long leagueId, Date dateFrom, Date dateTo, String groupName, String teamName) {
+        return gameRepository.findGames(leagueId, dateFrom, dateTo, groupName, teamName);
     }
 }

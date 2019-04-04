@@ -9,7 +9,7 @@ import rs.jspasic.league.model.Group;
 import java.util.List;
 
 @Repository
-public interface GameRepository extends JpaRepository<Game, Long> {
+public interface GameRepository extends JpaRepository<Game, Long>, CustomGameRepository {
 
     @Query("select game from Game game inner join game.group")
     List<Game> findByGroup(Group g);
