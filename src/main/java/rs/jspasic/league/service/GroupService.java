@@ -8,6 +8,7 @@ public interface GroupService {
 
     Group findGroupById(Long groupId);
     Group findByLeagueNameAndGroupName(String leagueName, String groupName);
+    List<Group> findByLeagueIdAndGroupNames(Long leagueId, List<String> groupNames);
     List<Group> findByLeagueId(Long leagueId);
     Group addGroup(Group group);
     List<Group> addGroups(List<Group> groups);

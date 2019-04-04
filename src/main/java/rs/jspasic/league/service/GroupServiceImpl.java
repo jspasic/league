@@ -32,6 +32,13 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public List<Group> findByLeagueIdAndGroupNames(Long leagueId, List<String> groupNames) {
+        return groupRepository.findByLeagueIdAndGroupNames(leagueId, groupNames);
+    }
+
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Group> findByLeagueId(Long leagueId) {
         return groupRepository.findByLeagueId(leagueId);
     }

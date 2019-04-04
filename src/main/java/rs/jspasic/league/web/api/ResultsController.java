@@ -1,9 +1,12 @@
 package rs.jspasic.league.web.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import rs.jspasic.league.model.Game;
 import rs.jspasic.league.model.Group;
@@ -41,7 +44,7 @@ public class ResultsController {
     @PostMapping(path = "/group")
     public List<GroupStandings> saveGames(@RequestBody List<GameWrapper> gameResults) {
         List<Game> games = gameResults.stream()
-                .map(gw -> extractAndHydrateGame(gw))
+                .map(this::extractAndHydrateGame)
                 .collect(Collectors.toList());
 
         games = gameService.saveAllGames(games);
@@ -49,6 +52,22 @@ public class ResultsController {
         Set<Group> groups = games.stream()
                 .map(Game::getGroup)
                 .collect(Collectors.toSet());
+
+        List<GroupStandings> allGroupsStandings = groups.stream()
+                .map(StandingsCalculator::getGroupStandings)
+                .collect(Collectors.toList());
+
+        return allGroupsStandings;
+    }
+
+    @GetMapping("/{leagueId}")
+    public List<GroupStandings> getCurrentStandings(@PathVariable Long leagueId, @RequestParam(name = "groupName", required = false) List<String> requestedGroups) {
+        List<Group> groups;
+        if (requestedGroups == null || requestedGroups.isEmpty()) {
+            groups = groupService.findByLeagueId(leagueId);
+        } else {
+            groups = groupService.findByLeagueIdAndGroupNames(leagueId, requestedGroups);
+        }
 
         List<GroupStandings> allGroupsStandings = groups.stream()
                 .map(StandingsCalculator::getGroupStandings)
