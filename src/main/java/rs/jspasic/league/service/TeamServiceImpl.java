@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import rs.jspasic.league.exception.TeamNotFoundException;
 import rs.jspasic.league.model.Team;
 import rs.jspasic.league.repository.TeamRepository;
 
@@ -20,14 +21,14 @@ public class TeamServiceImpl implements TeamService {
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Team findTeamById(Long teamId) {
         Optional<Team> to = teamRepository.findById(teamId);
-        return to.orElse(null);
+        return to.orElseThrow(TeamNotFoundException::new);
     }
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Team findTeamByName(String teamName) {
         Optional<Team> to = teamRepository.findByTeamName(teamName);
-        return to.orElse(null);
+        return to.orElseThrow(TeamNotFoundException::new);
     }
 
     @Override
