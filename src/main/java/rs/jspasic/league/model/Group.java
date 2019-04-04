@@ -29,7 +29,7 @@ public class Group {
     @JoinColumn(name = "league_id")
     private League league;
     @OneToMany(mappedBy = "group")
-    private List<Game> games;
+    private List<Game> games = new ArrayList<>();
     @ManyToMany
     @JoinTable(name = "teams_groups",
             joinColumns = @JoinColumn(name = "group_id"),
