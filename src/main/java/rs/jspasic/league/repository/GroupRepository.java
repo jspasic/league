@@ -13,9 +13,12 @@ public interface GroupRepository extends JpaRepository<Group, Long> {
     @Query("select g from Group g inner join g.league where g.league.leagueName = :leagueName and g.groupName = :groupName")
     Optional<Group> findByLeagueNameAndGroupName(String leagueName, String groupName);
 
-    @Query("select g from Group g inner join g.league inner join g.games inner join g.teams where g.league.leagueId = :leagueId and g.groupName in (:groupNames)")
+    @Query("select g from Group g inner join g.league inner join g.games inner join g.teams where g.league.id = :leagueId and g.groupName in (:groupNames)")
     List<Group> findByLeagueIdAndGroupNames(Long leagueId, List<String> groupNames);
 
     @Query("select g from Group g inner join g.league where g.league.id = :leagueId")
     List<Group> findByLeagueId(Long leagueId);
+
+    @Query("select g from Group g inner join g.league where g.league.leagueName = :leagueName")
+    List<Group> findByLeagueName(String leagueName);
 }

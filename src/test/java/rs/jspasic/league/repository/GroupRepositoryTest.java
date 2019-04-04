@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import rs.jspasic.league.model.Group;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.Assert.assertEquals;
@@ -63,5 +64,13 @@ public class GroupRepositoryTest {
         Optional<Group> go = groupRepository.findByLeagueNameAndGroupName(leagueName, groupName);
         assertTrue(go.isPresent());
         go.ifPresent(g -> assertEquals(1003L, g.getId().longValue()));
+    }
+
+    @Test
+    @Transactional
+    public void findByLeagueNameSucceeds() {
+        String leagueName = "Champions league 2017/18";
+        List<Group> groups = groupRepository.findByLeagueName(leagueName);
+        assertEquals(8, groups.size());
     }
 }
