@@ -1,5 +1,7 @@
 package rs.jspasic.league.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,8 +26,10 @@ public class League {
     @Column(name = "league_name")
     private String leagueName;
     @OneToMany(mappedBy = "league")
+    @JsonIgnore
     private List<Group> groups = new ArrayList<>();
     @OneToMany(mappedBy = "league")
+    @JsonIgnore
     private List<Game> games = new ArrayList<>();
     @ManyToMany
     @JoinTable(name = "teams_leagues",
