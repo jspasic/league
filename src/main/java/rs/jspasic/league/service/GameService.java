@@ -11,4 +11,5 @@ public interface GameService {
     List<Game> saveAllGames(List<Game> games);
     List<Game> findByGroup(Group g);
     List<Game> findGames(Long leagueId, Date dateFrom, Date dateTo, String groupName, String teamName);
+    Game findById(Long gameId);
 }

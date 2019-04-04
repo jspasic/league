@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import rs.jspasic.league.exception.GameNotFoundException;
 import rs.jspasic.league.model.Game;
 import rs.jspasic.league.model.Group;
 import rs.jspasic.league.repository.GameRepository;
@@ -30,14 +31,20 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Game> findByGroup(Group g) {
         return gameRepository.findByGroup(g);
     }
 
     @Override
-    @Transactional(propagation = Propagation.SUPPORTS)
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Game> findGames(Long leagueId, Date dateFrom, Date dateTo, String groupName, String teamName) {
         return gameRepository.findGames(leagueId, dateFrom, dateTo, groupName, teamName);
+    }
+
+    @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public Game findById(Long gameId) {
+        return gameRepository.findById(gameId).orElseThrow(() -> new GameNotFoundException("No game with gameId=" + gameId));
     }
 }
